@@ -18,9 +18,9 @@ import java.util.Scanner;
 
 @RestController
 public class CalcController {
-    private static final Logger LOG = LoggerFactory.getLogger(CalcController.class);
+    private final Logger LOG = LoggerFactory.getLogger(CalcController.class);
 
-    private static final String HISTORY_FILE_PATH = "logs/history.txt";
+    private static final String HISTORY_FILE_PATH = "/Users/fbeatris/SmartCalcFiles/history.txt";
     private static final String STATUS_OK = "OK";
     private static final String STATUS_SYNTAX_ERROR = "Syntax Error";
     private static final String STATUS_SYSTEM_ERROR = "System Error";
