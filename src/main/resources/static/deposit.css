@@ -1,0 +1,142 @@
+.form__container {
+    display: block;
+}
+
+.help {
+    display: block;
+    position: relative;
+    float: left;
+    padding-right: 0.5em;
+    padding-top: 0.2em;
+    font-size: 150%;
+    left: 10px;
+    cursor: pointer;
+
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    font-family: inherit;
+    font-weight: inherit;
+    outline: none;
+    appearance: none;
+    text-align: left;
+}
+
+.exit {
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    font-family: inherit;
+    font-weight: inherit;
+    outline: none;
+    appearance: none;
+    text-align: left;
+}
+
+.credit_form {
+    float: left;
+    box-shadow: 0 0 40px 0px rgba(0, 0, 0, 0.15);
+    width: 840px;
+    background-color: #eee;
+    padding: 20px;
+    font-size: 0.7em;
+    margin-left: 30px;
+}
+
+.form_div {
+    margin: 10px;
+}
+
+.radio {
+    margin-top: 20px;
+}
+
+.radio input {
+    margin-top: 10px;
+    /*width: 20px;*/
+    /*height: 20px;*/
+    accent-color: #222222;
+}
+
+.check {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+.check input {
+    margin-top: 10px;
+    /*width: 20px;*/
+    /*height: 20px;*/
+    accent-color: #222222;
+}
+
+.buttons {
+    margin-top: 30px;
+}
+
+.text_field {
+    background-color: #fff;
+    width:59%;
+    padding: 0.5em 0.5em;
+    position: relative;
+    border: 0;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+}
+
+.fields_list {
+    display: inline-block;
+}
+
+.fields_list .form_div {
+    float: left;
+    width: 45%;
+}
+
+.fields_list input {
+    background-color: #fff;
+    /*color: #888;*/
+    width:45%;
+    padding: 0.25em 0.25em;
+    position: relative;
+    border: 0;
+    font-size: smaller;
+    font-family: inherit;
+    font-weight: inherit;
+    margin: 5px;
+}
+
+.text_label {
+    display: inline-block;
+    width:40%;
+}
+
+.reset_button {
+    padding: 0.75em 1.25em;
+    position: relative;
+    text-align: center;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    background-image: linear-gradient(to bottom, #ddd, #ccc);
+    border: 0;
+    cursor: pointer;
+}
+
+.submit_button {
+    padding: 0.75em 1.25em;
+    position: relative;
+    text-align: center;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    background-image: linear-gradient(to bottom, #fe886a, #ff7033);
+    border: 0;
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 50px;
+    padding: 0.5em 0.5em;
+    display: none;
+}

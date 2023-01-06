@@ -1,0 +1,85 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="styles.css">
+		<link rel="stylesheet" href="credit.css">
+		<link rel="stylesheet" href="Chart.min.css">
+		<link type="image/x-icon" href="favicon.png" rel="shortcut icon">
+		<link type="Image/x-icon" href="favicon.png" rel="icon">
+		<title>Smart Calc v3.0 by fbeatris - Credit</title>
+	</head>
+	<body>
+		<button class="exit">❌</button>
+
+		<div class="container">
+			<p class="header">
+				Welcome to Super Mega Smart Calculator v3.0 Ultra Max S+
+			</p>
+
+			<div class="menu">
+				<ul>
+					<li><a href="index.html">Math</a></li>
+					<li>Credit</li>
+					<li><a href="deposit.html">Deposit</a></li>
+				</ul>
+			</div>
+			<div class="form__container">
+<!--				<button class="help" data-action="help">❔</button>-->
+
+				<div class="credit_form">
+					<form>
+						<div class="form_div">
+							<label for="amount" class="text_label">Сумма кредита</label>
+							<input type="text" name="amount" id="amount" class="text_field" required>
+						</div>
+						<div class="form_div">
+							<label for="period" class="text_label">Срок кредита</label>
+							<input type="text" name="period" id="period" class="text_field" placeholder="в месяцах" required>
+						</div>
+						<div class="form_div">
+							<label for="percent" class="text_label">Процентная ставка</label>
+							<input type="text" name="percent" id="percent" class="text_field" placeholder="%" required>
+						</div>
+						<div class="form_div radio" id="radio">
+							<p>Типа платежа</p>
+							<input type="radio" name="type" id="type_annuity" checked>
+							<label for="type_annuity">Аннуитетный</label>
+							<input type="radio" name="type" id="type_differentiated">
+							<label for="type_differentiated">Дифференцированный</label>
+						</div>
+						<div class="form_div buttons">
+							<input type="reset" value="Очистить форму" class="reset_button">
+							<button class="submit_button">Посчитать</button>
+						</div>
+
+					</form>
+
+					<div class="result">
+						<p>Ежемесячный платёж <b><span id="monthlyPayment">1000</span></b></p>
+						<p>Переплата по кредиту <b><span id="overPayment">1000</span></b></p>
+						<p>Общая выплата <b><span id="totalPayment">1000</span></b></p>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="help_layer">
+				<div class="bubble bubble-bottom-right help_display">Введите выражение</div>
+				<div class="bubble bubble-bottom-right help_functions">Можно использовать не только простые арифметические операции, но и тригонометрические функции. Всё по взрослому 😎</div>
+				<div class="bubble bubble-top-left help_calculate">Нажмине <b>=</b> чтобы получить результат</div>
+				<div class="bubble bubble-bottom-left help_var">В выражение можно вставить переменную и после нажатия <b>=</b> подставлять значения, результат будет сразу пересчитываться</div>
+				<div class="bubble bubble-top-right help_graph">Нажмите <b>~</b> чтобы построить график, указав диапазон значений X</div>
+				<div class="bubble bubble-bottom-left help_history">История запросов</div>
+			</div>
+
+
+		</div>
+		<div class="copyright">&#169; fbeatris</div>
+
+
+		<script src="scripts.js"></script>
+		<script src="Chart.min.js"></script>
+
+	</body>
+</html>
+
