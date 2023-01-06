@@ -3,15 +3,14 @@ package school21.smartcalc.app;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import school21.smartcalc.viewModel.CalcController;
-import school21.smartcalc.viewModel.CalcLogger;
+import school21.smartcalc.viewModel.Controller;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 @SpringBootApplication
-@ComponentScan(basePackageClasses = CalcController.class)
+@ComponentScan(basePackageClasses = Controller.class)
 public class App {
     public static void main(String[] args) throws IOException {
 

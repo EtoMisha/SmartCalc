@@ -6,13 +6,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 
-public class CalcLogger {
+public class CustomLogger {
     private static final String FILENAME = "calc.log";
-    private static final CalcLogger logger;
+    private static final CustomLogger logger;
 
     static {
         try {
-            logger = new CalcLogger();
+            logger = new CustomLogger();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -20,13 +20,13 @@ public class CalcLogger {
 
     private final PrintWriter writer;
 
-    public CalcLogger() throws IOException {
+    public CustomLogger() throws IOException {
         String logsDirPath = System.getProperty("user.home") + "/SmartCalcFiles/logs/";
         Files.createDirectories(Paths.get(logsDirPath));
         writer = new PrintWriter(Files.newOutputStream(Paths.get(logsDirPath + FILENAME)));
     }
 
-    public static CalcLogger getLogger() {
+    public static CustomLogger getLogger() {
         return logger;
     }
 

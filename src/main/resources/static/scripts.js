@@ -183,8 +183,8 @@ function makeGraph() {
             status: null,
             message: null,
             output: null,
-            xValues: null,
-            yValues: null
+            xvalues: null,
+            yvalues: null
         };
         const data = JSON.stringify(req);
         const xhr = new XMLHttpRequest();
@@ -194,19 +194,19 @@ function makeGraph() {
             response = JSON.parse(xhr.responseText);
             const status = response.status
             if (status === "OK") {
-                console.log(response.xValues);
-                console.log(response.yValues);
+                console.log(response.xvalues);
+                console.log(response.yvalues);
 
                 let ctx = document.getElementById('myChart').getContext('2d');
                 let chart = new Chart(ctx, {
                     type: 'line',
 
                     data: {
-                        labels: response.xValues,
+                        labels: response.xvalues,
                         datasets: [{
                             label: displayInput.value, // Название
                             borderColor: 'rgb(255, 99, 132)', // Цвет линии
-                            data: response.yValues // Данные каждой точки графика
+                            data: response.yvalues // Данные каждой точки графика
                         }]
                     },
 
