@@ -4,7 +4,9 @@ import lombok.Data;
 
 @Data
 public class CreditResponse {
-    private double monthlyPayment;
+    private String status;
+    private String message;
+    private String monthlyPayment;
     private double overPayment;
     private double totalPayment;
 }

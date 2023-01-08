@@ -31,4 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
 /.mvn/
+.settings/
+*.class
+*.jar
+tags
+out/

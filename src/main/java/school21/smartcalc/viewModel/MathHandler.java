@@ -2,10 +2,7 @@ package school21.smartcalc.viewModel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.expression.EvaluationException;
-import org.springframework.expression.ParseException;
-import org.springframework.web.bind.annotation.PathVariable;
-import school21.smartcalc.core.Calc;
+import school21.smartcalc.core.MathCalc;
 import school21.smartcalc.models.MathRequest;
 import school21.smartcalc.models.MathResponse;
 
@@ -19,15 +16,16 @@ import java.util.Scanner;
 
 public class MathHandler {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Controller.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MathHandler.class);
 
-    private static final String HISTORY_FILE_PATH = "/Users/fbeatris/SmartCalcFiles/history.txt";
+    private static final String HISTORY_FILE_PATH = System.getProperty("user.home") + "/SmartCalcFiles/history.txt";
     private static final String STATUS_OK = "OK";
-    private static final String STATUS_SYNTAX_ERROR = "Syntax Error";
-    private static final String STATUS_SYSTEM_ERROR = "System Error";
+    private static final String STATUS_ERROR = "Error";
     private static final String VAR = "x";
 
     public MathResponse getConstant(MathRequest mathRequest) {
+        LOG.info("[getConstant] request: " + mathRequest);
+
         String input = mathRequest.getInput();
         String calcResult;
         MathResponse mathResponse = new MathResponse();
@@ -35,26 +33,25 @@ public class MathHandler {
         try {
             saveHistory(input);
 
-            Calc calc = new Calc(input);
-            calcResult = calc.calculate();
+            MathCalc mathCalc = new MathCalc(input);
+            calcResult = String.valueOf(mathCalc.calculate());
 
             mathResponse.setStatus(STATUS_OK);
             mathResponse.setOutput(calcResult);
 
-            LOG.info("[getConstant] ok, input: " + input);
-        } catch (ParseException ex) {
-            mathResponse.setStatus(STATUS_SYNTAX_ERROR);
+            LOG.info("[getConstant] ok, response: " + mathResponse);
+        } catch (Exception ex) {
+            mathResponse.setStatus(STATUS_ERROR);
             mathResponse.setMessage(ex.getMessage());
-            LOG.error("[getConstant] " + STATUS_SYNTAX_ERROR + ": " + ex.getMessage() + ", input: " + input);
-        } catch (EvaluationException | IOException ex) {
-            mathResponse.setStatus(STATUS_SYSTEM_ERROR);
-            mathResponse.setMessage(ex.getMessage());
-            LOG.error("[getConstant] " + STATUS_SYSTEM_ERROR + ": " + ex.getMessage() + ", input: " + input);
+            LOG.error("[getConstant] error: " + ex.getMessage());
         }
+
         return mathResponse;
     }
 
     public MathResponse getGraph(MathRequest mathRequest) {
+        LOG.info("[getGraph] request: " + mathRequest);
+
         MathResponse mathResponse = new MathResponse();
         List<Double> xList = new ArrayList<>();
         List<Double> yList = new ArrayList<>();
@@ -67,24 +64,21 @@ public class MathHandler {
             double to = mathRequest.getTo();
             double step = (to - from) / 100;
             for (double i = from; i <= to; i += step) {
-                Calc calc = new Calc(input.replaceAll(VAR, String.valueOf(i)));
-                xList.add((double) Math.round(i * 100) / 100);
-                yList.add(Double.parseDouble(calc.calculate()));
+                MathCalc mathCalc = new MathCalc(input.replaceAll(VAR, String.valueOf(i)));
+                xList.add((double) java.lang.Math.round(i * 100) / 100);
+                yList.add(mathCalc.calculate());
             }
             mathResponse.setStatus(STATUS_OK);
             mathResponse.setXValues(xList);
             mathResponse.setYValues(yList);
-            LOG.info("[getGraph] ok, input: " + input);
-        } catch (ParseException ex) {
-            mathResponse.setStatus(STATUS_SYNTAX_ERROR);
+
+            LOG.info("[getGraph] ok, response xValues: " + xList.get(0) + "..." + xList.get(xList.size() - 1)
+                    + " yValues: " + yList.get(0) + "..." + yList.get(yList.size() - 1));
+        } catch (Exception ex) {
+            mathResponse.setStatus(STATUS_ERROR);
             mathResponse.setMessage(ex.getMessage());
-            LOG.error("[getGraph] " + STATUS_SYNTAX_ERROR + ": " + ex.getMessage() + ", input: " + input);
-        } catch (EvaluationException | IOException ex) {
-            mathResponse.setStatus(STATUS_SYSTEM_ERROR);
-            mathResponse.setMessage(ex.getMessage());
-            LOG.error("[getGraph] " + STATUS_SYSTEM_ERROR + ": " + ex.getMessage() + ", input: " + input);
+            LOG.error("[getGraph] error: " + ex.getMessage());
         }
-        LOG.info("graph response " + mathResponse);
         return mathResponse;
     }
 

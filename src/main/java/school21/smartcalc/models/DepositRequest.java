@@ -2,16 +2,16 @@ package school21.smartcalc.models;
 
 import lombok.Data;
 
-import java.time.LocalDate;
-import java.util.Map;
+import java.util.List;
 
 @Data
 public class DepositRequest {
     private double amount;
-    private int period;
+    private double period;
+    private double percent;
     private double tax;
     private String frequency;
     private boolean capitalisation;
-    private Map<LocalDate, Double> deposits;
-    private Map<LocalDate, Double> withdraws;
+    private List<Double> deposits;
+    private List<Double> withdrawals;
 }

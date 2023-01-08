@@ -33,13 +33,14 @@ public class Controller {
         mathHandler.clearHistory();
     }
 
-    @PostMapping(value = "/getCredit", produces = MediaType.APPLICATION_JSON_VALUE)
-    public CreditResponse getCredit(@RequestParam CreditRequest request) {
+    @PostMapping(value = "/credit", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CreditResponse getCredit(@RequestBody CreditRequest request) {
+        LoggerFactory.getLogger(Controller.class).info("controller request " + request);
         return creditHandler.getCredit(request);
     }
 
-    @PostMapping(value = "/getDeposit", produces = MediaType.APPLICATION_JSON_VALUE)
-    public DepositResponse getCredit(@RequestParam DepositRequest request) {
+    @PostMapping(value = "/deposit", produces = MediaType.APPLICATION_JSON_VALUE)
+    public DepositResponse getCredit(@RequestBody DepositRequest request) {
         return depositHandler.getDeposit(request);
     }
 

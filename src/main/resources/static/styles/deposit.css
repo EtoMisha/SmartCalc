@@ -2,26 +2,6 @@
     display: block;
 }
 
-.help {
-    display: block;
-    position: relative;
-    float: left;
-    padding-right: 0.5em;
-    padding-top: 0.2em;
-    font-size: 150%;
-    left: 10px;
-    cursor: pointer;
-
-    border: 0;
-    border-radius: 0;
-    background-color: transparent;
-    font-family: inherit;
-    font-weight: inherit;
-    outline: none;
-    appearance: none;
-    text-align: left;
-}
-
 .exit {
     border: 0;
     border-radius: 0;
@@ -53,8 +33,6 @@
 
 .radio input {
     margin-top: 10px;
-    /*width: 20px;*/
-    /*height: 20px;*/
     accent-color: #222222;
 }
 
@@ -64,8 +42,6 @@
 }
 .check input {
     margin-top: 10px;
-    /*width: 20px;*/
-    /*height: 20px;*/
     accent-color: #222222;
 }
 
@@ -90,14 +66,12 @@
 
 .fields_list .form_div {
     float: left;
-    width: 45%;
+    margin-right: 50px;
 }
 
 .fields_list input {
     background-color: #fff;
-    /*color: #888;*/
-    width:45%;
-    padding: 0.25em 0.25em;
+    padding: 0.5em 0.5em;
     position: relative;
     border: 0;
     font-size: smaller;
@@ -111,7 +85,7 @@
     width:40%;
 }
 
-.reset_button {
+.deposit_clear {
     padding: 0.75em 1.25em;
     position: relative;
     text-align: center;
@@ -123,7 +97,7 @@
     cursor: pointer;
 }
 
-.submit_button {
+.deposit_submit {
     padding: 0.75em 1.25em;
     position: relative;
     text-align: center;
@@ -136,6 +110,12 @@
 }
 
 .result {
+    margin-top: 50px;
+    padding: 0.5em 0.5em;
+    display: none;
+}
+
+.result_error {
     margin-top: 50px;
     padding: 0.5em 0.5em;
     display: none;

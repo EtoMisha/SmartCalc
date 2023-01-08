@@ -1,3 +1,5 @@
+const url = "http://localhost:2121/"
+
 const calculator = document.querySelector('.calculator')
 const keys = calculator.querySelector('.calculator__keys')
 let displayInput = document.getElementById('displayInput')
@@ -71,7 +73,7 @@ keys.addEventListener('click', e => {
                         };
                         const data = JSON.stringify(req);
                         const xhr = new XMLHttpRequest();
-                        xhr.open("POST", "http://localhost:8080/constant");
+                        xhr.open("POST", url + "constant");
                         xhr.setRequestHeader("Content-Type", "application/json");
                         xhr.onload = function() {
                             response = JSON.parse(xhr.responseText);
@@ -95,7 +97,7 @@ keys.addEventListener('click', e => {
                     };
                     const data = JSON.stringify(req);
                     const xhr = new XMLHttpRequest();
-                    xhr.open("POST", "http://localhost:8080/constant");
+                    xhr.open("POST", url + "constant");
                     xhr.setRequestHeader("Content-Type", "application/json");
                     xhr.onload = function() {
                         response = JSON.parse(xhr.responseText);
@@ -136,13 +138,16 @@ document.querySelector('.help').onclick = function() {
         document.getElementsByClassName('help_layer')[0].style.visibility = 'hidden'
         isHelpVisible = false
     } else {
+        document.getElementsByClassName('calculator__graph')[0].style.display = 'none';
+        document.getElementsByClassName('calculator__var')[0].style.display = 'none';
+        document.getElementsByClassName('graph__container')[0].style.display = 'none';
         document.getElementsByClassName('help_layer')[0].style.visibility = 'visible'
         isHelpVisible = true
     }
 }
 
 document.querySelector('.history_up').onclick = async function () {
-    let response = await fetch('http://localhost:8080/getHistory/' + historyNum);
+    let response = await fetch(url + 'getHistory/' + historyNum);
     let text = await response.text();
 
     displayInput.value = text
@@ -155,16 +160,16 @@ document.querySelector('.history_down').onclick = async function () {
     if (historyNum > 0) {
         historyNum--
     }
-    let response = await fetch('http://localhost:8080/getHistory/' + historyNum);
+    let response = await fetch(url + 'getHistory/' + historyNum);
     displayInput.value = await response.text()
 }
 
 document.querySelector('.history_clear').onclick = async function () {
-    fetch("http://localhost:8080/clearHistory", null).then(() => null);
+    fetch(url + "clearHistory", null).then(() => null);
 }
 
 document.querySelector('.exit').onclick = function () {
-    fetch("http://localhost:8080/exit", null).then(() => null);
+    fetch(url + "exit", null).then(() => null);
     setTimeout(() => { window.close(); }, 1000);
 }
 
@@ -188,14 +193,12 @@ function makeGraph() {
         };
         const data = JSON.stringify(req);
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:8080/graph");
+        xhr.open("POST", url + "graph");
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onload = function() {
             response = JSON.parse(xhr.responseText);
             const status = response.status
             if (status === "OK") {
-                console.log(response.xvalues);
-                console.log(response.yvalues);
 
                 let ctx = document.getElementById('myChart').getContext('2d');
                 let chart = new Chart(ctx, {
@@ -229,6 +232,8 @@ function makeGraph() {
     }
 
 }
+
+
 
 
 

@@ -1,28 +1,22 @@
 package school21.smartcalc.core;
 
-public class Calc {
+public class MathCalc {
     private final String input;
     private int pos = -1;
     private int ch;
 
-    public Calc(String input) {
+    public MathCalc(String input) {
         this.input = input.replaceAll("mod", "%")
                 .replaceAll("√", "sqrt");
     }
 
-    public String calculate() {
-        String result;
-        try {
-            nextChar();
-            double x = parseExpression();
-            if (pos < input.length()) {
-                throw new RuntimeException("Unexpected: " + (char)ch);
-            }
-            result = String.valueOf(x);
-        } catch (RuntimeException ex) {
-            result = ex.getMessage();
+    public double calculate() throws Exception {
+        nextChar();
+        double x = parseExpression();
+        if (pos < input.length()) {
+            throw new Exception("Unexpected: " + (char) ch);
         }
-        return result;
+        return x;
     }
 
     private void nextChar() {
@@ -38,7 +32,7 @@ public class Calc {
         return false;
     }
 
-    private double parseExpression() {
+    private double parseExpression() throws Exception{
         double x = parseTerm();
         for (;;) {
             if      (eat('+')) x += parseTerm(); // addition
@@ -47,19 +41,19 @@ public class Calc {
         }
     }
 
-    private double parseTerm() {
+    private double parseTerm() throws Exception {
         double x = parseFactor();
         for (;;) {
             if      (eat('*')) x *= parseFactor();                  // multiplication
             else if (eat('/')) x /= parseFactor();                  // division
             else if (eat('%')) x %= parseFactor();                  // mod
-            else if (eat('E')) x = x * Math.pow(10, parseFactor()); // exp form
-            else if (eat('^')) x = Math.pow(x, parseFactor());      // exponentiation
+            else if (eat('E')) x = x * java.lang.Math.pow(10, parseFactor()); // exp form
+            else if (eat('^')) x = java.lang.Math.pow(x, parseFactor());      // exponentiation
             else return x;
         }
     }
 
-    private double parseFactor() throws RuntimeException {
+    private double parseFactor() throws Exception {
         if (eat('+')) return +parseFactor();    // unary plus
         if (eat('-')) return -parseFactor();    // unary minus
 
@@ -82,31 +76,31 @@ public class Calc {
             }
             switch (func) {
                 case "sin":
-                    x = Math.sin(Math.toRadians(x));
+                    x = java.lang.Math.sin(java.lang.Math.toRadians(x));
                     break;
                 case "cos":
-                    x = Math.cos(Math.toRadians(x));
+                    x = java.lang.Math.cos(java.lang.Math.toRadians(x));
                     break;
                 case "tan":
-                    x = Math.tan(Math.toRadians(x));
+                    x = java.lang.Math.tan(java.lang.Math.toRadians(x));
                     break;
                 case "log":
-                    x = Math.log10(x);
+                    x = java.lang.Math.log10(x);
                     break;
                 case "ln":
-                    x = Math.log(x);
+                    x = java.lang.Math.log(x);
                     break;
                 case "asin":
-                    x = Math.asin(x);
+                    x = java.lang.Math.asin(x);
                     break;
                 case "acos":
-                    x = Math.acos(x);
+                    x = java.lang.Math.acos(x);
                     break;
                 case "atan":
-                    x = Math.atan(x);
+                    x = java.lang.Math.atan(x);
                     break;
                 case "sqrt":
-                    x = Math.sqrt(x);
+                    x = java.lang.Math.sqrt(x);
                     break;
                 default:
                     throw new RuntimeException("Unknown function: " + func);
