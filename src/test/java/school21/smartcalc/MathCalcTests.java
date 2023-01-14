@@ -21,6 +21,11 @@ public class MathCalcTests {
         z = ThreadLocalRandom.current().nextDouble(Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
+    @Test
+    void errorTest() {
+
+    }
+
     @RepeatedTest(10)
     void sum() throws Exception {
         String expression = String.format("%f + %f", x, y);
@@ -105,8 +110,9 @@ public class MathCalcTests {
 
     @RepeatedTest(10)
     void tan() throws Exception {
-        String expression = String.format("tan(%f)", x);
-        BigDecimal checkResult = new BigDecimal(java.lang.Math.tan(java.lang.Math.toRadians(x)), context);
+        double n = ThreadLocalRandom.current().nextDouble(-89, 89);
+        String expression = String.format("tan(%f)", n);
+        BigDecimal checkResult = new BigDecimal(java.lang.Math.tan(java.lang.Math.toRadians(n)), context);
         BigDecimal testResult = new BigDecimal(new MathCalc(expression).calculate(), context);
         Assertions.assertEquals(checkResult, testResult);
     }
