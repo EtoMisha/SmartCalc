@@ -44,11 +44,24 @@ public class MathCalc {
     private double parseTerm() throws Exception {
         double x = parseFactor();
         for (;;) {
-            if      (eat('*')) x *= parseFactor();                  // multiplication
-            else if (eat('/')) x /= parseFactor();                  // division
-            else if (eat('%')) x %= parseFactor();                  // mod
-            else if (eat('E')) x = x * java.lang.Math.pow(10, parseFactor()); // exp form
-            else if (eat('^')) x = java.lang.Math.pow(x, parseFactor());      // exponentiation
+            if      (eat('*')) x *= parseFactor();
+            else if (eat('/')) {
+                double parseF = parseFactor();
+                if (parseF == 0.0) {
+                    throw new Exception("Division by zero");
+                } else {
+                    x /= parseF;
+                }
+            }
+            else if (eat('%')) {
+                double parseF = parseFactor();
+                if (parseF == 0.0) {
+                    throw new Exception("Division by zero");
+                }
+                x %= parseF;
+            }
+            else if (eat('E')) x = x * java.lang.Math.pow(10, parseFactor());
+            else if (eat('^')) x = java.lang.Math.pow(x, parseFactor());
             else return x;
         }
     }
@@ -82,24 +95,44 @@ public class MathCalc {
                     x = java.lang.Math.cos(java.lang.Math.toRadians(x));
                     break;
                 case "tan":
+                    if ((x + 90) % 180 == 0) {
+                        throw new Exception("Tan is undefined");
+                    }
                     x = java.lang.Math.tan(java.lang.Math.toRadians(x));
                     break;
                 case "log":
+                    if (x < 0) {
+                        throw new Exception("Log from negative value");
+                    } else if (x == 0) {
+                        throw new Exception("-Infinity");
+                    }
                     x = java.lang.Math.log10(x);
                     break;
                 case "ln":
+                    if (x < 0) {
+                        throw new Exception("Log from negative value");
+                    }
                     x = java.lang.Math.log(x);
                     break;
                 case "asin":
+                    if (x < -1 || x > 1) {
+                        throw new Exception("Asin is undefined");
+                    }
                     x = java.lang.Math.asin(x);
                     break;
                 case "acos":
+                    if (x < -1 || x > 1) {
+                        throw new Exception("Acos is undefined");
+                    }
                     x = java.lang.Math.acos(x);
                     break;
                 case "atan":
                     x = java.lang.Math.atan(x);
                     break;
                 case "sqrt":
+                    if (x < 0) {
+                        throw new Exception("Sqrt from negative value");
+                    }
                     x = java.lang.Math.sqrt(x);
                     break;
                 default:

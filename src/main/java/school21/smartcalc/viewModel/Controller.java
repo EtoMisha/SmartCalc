@@ -1,17 +1,24 @@
 package school21.smartcalc.viewModel;
 
+import org.apache.tomcat.util.json.JSONParser;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import school21.smartcalc.models.*;
 
 import java.io.*;
+import java.util.Properties;
 
 @RestController
 public class Controller {
     private final MathHandler mathHandler = new MathHandler();
     private final CreditHandler creditHandler = new CreditHandler();
     private final DepositHandler depositHandler = new DepositHandler();
+
+    @GetMapping(value="/properties")
+    public CalcProperties getProperties() {
+        return new PropertiesHandler().getProperties();
+    }
 
     @PostMapping(value = "/constant", produces = MediaType.APPLICATION_JSON_VALUE)
     public MathResponse getConstant(@RequestBody MathRequest mathRequest) {
