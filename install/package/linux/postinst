@@ -1,0 +1,14 @@
+#!/bin/bash
+
+mkdir $HOME/SmartCalcFiles
+mkdir $HOME/SmartCalcFiles/logs/
+touch $HOME/SmartCalcFiles/config.properties
+
+echo "background.color1=#74ebd5
+background.color2=#acb6e5
+
+font.color=#222222
+font.size=175%
+
+logging.rotation.days=1" > $HOME/SmartCalcFiles/config.properties
+exit 0
