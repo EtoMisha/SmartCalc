@@ -25,9 +25,27 @@ public class App {
         app.setDefaultProperties(Collections.singletonMap("server.port", PORT));
         app.run();
 
-        Runtime rt = Runtime.getRuntime();
         String url = "http://localhost:" + PORT;
-        rt.exec("open " + url);
+        Runtime rt = Runtime.getRuntime();
+        String os = System.getProperty("os.name");
+        System.out.println(os);
+        if (os.contains("Mac")) {
+            rt.exec("open " + url);
+        } else if (os.contains("nix") || os.contains("nux")) {
+            String[] browsers = { "google-chrome", "firefox", "mozilla", "epiphany", "konqueror",
+                    "netscape", "opera", "links", "lynx" };
+
+            StringBuilder cmd = new StringBuilder();
+            for (int i = 0; i < browsers.length; i++)
+                if(i == 0)
+                    cmd.append(String.format(    "%s \"%s\"", browsers[i], url));
+                else
+                    cmd.append(String.format(" || %s \"%s\"", browsers[i], url));
+
+            rt.exec(new String[] { "sh", "-c", cmd.toString() });
+        } else if (os.contains("Win")) {
+            rt.exec("rundll32 url.dll,FileProtocolHandler " + url);
+        }
 
         f.setVisible(false);
         f.dispose();
