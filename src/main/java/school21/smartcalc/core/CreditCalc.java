@@ -46,14 +46,14 @@ public class CreditCalc {
     }
 
     public double getMonthlyPayment() {
-        return monthlyPayment;
+        return Math.round(monthlyPayment * 100.0) / 100.0;
     }
 
     public double getOverPayment() {
-        return overPayment;
+        return Math.round(overPayment * 100.0) / 100.0;
     }
 
     public double getTotalPayment() {
-        return totalPayment;
+        return Math.round(totalPayment * 100.0) / 100.0;
     }
 }
