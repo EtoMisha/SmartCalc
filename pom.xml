@@ -41,14 +41,7 @@
             <version>1.18.12</version>
             <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <groupId>com.github.goxr3plus</groupId>
-            <artifactId>JavaFX-Web-Browser</artifactId>
-            <version>V3.5.1</version>
-        </dependency>
-
-
+        
     </dependencies>
 
     <build>
