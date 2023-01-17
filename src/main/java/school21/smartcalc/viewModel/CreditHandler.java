@@ -12,10 +12,11 @@ public class CreditHandler {
     public CreditResponse getCredit(CreditRequest request) {
         LOG.info("[getCredit] request " + request);
 
-        CreditCalc creditCalc = new CreditCalc(request.getAmount(), request.getPeriod(), request.getPercent());
         CreditResponse response = new CreditResponse();
 
         try {
+            CreditCalc creditCalc = new CreditCalc(request.getAmount(), request.getPeriod(), request.getPercent());
+
             String type = request.getType();
             if ("type_annuity".equals(type)) {
                 creditCalc.calculateAnnuity();

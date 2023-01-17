@@ -11,17 +11,21 @@ public class CreditCalc {
 
     private int monthCount;
 
-    public CreditCalc(double amount, double period, double percent) {
+    public CreditCalc(double amount, double period, double percent) throws Exception {
+        if (period <= 0) {
+            throw new Exception("Срок кредита должен быть больше 0");
+        }
+
+        if (percent < 0) {
+            throw new Exception("Процентная ставка должна быть больше или равна 0");
+        }
+
         this.amount = amount;
         this.period = period;
         this.percent = percent;
     }
 
-    public void calculateDifferentiated() throws Exception {
-        if (period <= 0) {
-            throw new Exception("Срок кредита должен быть больше 0");
-        }
-
+    public void calculateDifferentiated() {
         double currentAmount = amount - (amount / period) * monthCount;
         monthlyPayment = amount / period + currentAmount * percent / 1200;
         totalPayment = monthlyPayment;
@@ -30,11 +34,7 @@ public class CreditCalc {
         monthCount++;
     }
 
-    public void calculateAnnuity() throws Exception {
-        if (period <= 0) {
-            throw new Exception("Срок кредита должен быть больше 0");
-        }
-
+    public void calculateAnnuity() {
         if (percent == 0.0) {
             monthlyPayment = amount / period;
         } else {
