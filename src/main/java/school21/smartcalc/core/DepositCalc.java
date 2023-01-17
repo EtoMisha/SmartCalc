@@ -27,8 +27,13 @@ public class DepositCalc {
             throw new Exception("Ставка должна быть больше либо равна 0");
         }
 
-        amount = amount + deposits.stream().filter(Objects::nonNull).reduce(0.0, Double::sum)
-                - withdrawals.stream().filter(Objects::nonNull).reduce(0.0, Double::sum);
+        if (deposits != null) {
+            amount += deposits.stream().filter(Objects::nonNull).reduce(0.0, Double::sum);
+        }
+
+        if (withdrawals != null) {
+            amount -= withdrawals.stream().filter(Objects::nonNull).reduce(0.0, Double::sum);
+        }
 
         if (capitalisation) {
             int count = 0;

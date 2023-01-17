@@ -35,7 +35,7 @@ public class CreditCalc {
             throw new Exception("Срок кредита должен быть больше 0");
         }
 
-        if (percent == 0) {
+        if (percent == 0.0) {
             monthlyPayment = amount / period;
         } else {
             monthlyPayment = (amount * (percent / 1200)) / (1 - Math.pow(1 + percent / 1200, -period));

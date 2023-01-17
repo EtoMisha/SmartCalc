@@ -13,9 +13,9 @@ public class MathCalc {
     public double calculate() throws Exception {
         nextChar();
         double x = parseExpression();
-        if (pos < input.length()) {
-            throw new Exception("Unexpected: " + (char) ch);
-        }
+//        if (pos < input.length()) {
+//            throw new Exception("Syntax Error");
+//        }
         return x;
     }
 
@@ -139,7 +139,7 @@ public class MathCalc {
                     throw new RuntimeException("Unknown function: " + func);
             }
         } else {
-            throw new RuntimeException("Unexpected: " + (char)ch);
+            throw new RuntimeException("Syntax Error");
         }
 
         return x;
